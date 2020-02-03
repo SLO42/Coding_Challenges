@@ -1,0 +1,59 @@
+Make A Change Machine
+
+Your task is to write a function to make a change machine, like this
+
+const myChangeMachine = makeChangeMachine({ 1: 20, 5: 3, 10: 4, 25:3 });
+
+This creates a change machines loaded with 20 pennies (one-cent coins), three nickels (five-cent coins), four dimes (10-cent coins), and three quarters (25-cent coins).
+
+A change machine is a function that takes an amount and two functions as arguments, a success function, called if the amount is possible, with an object representing the combination, and a failure function, if the amount is not possible. The success function returns true if the combination should actually be issued
+
+The following code shows some possible uses:
+
+const myChangeMachine = makeChangeMachine({ 1: 20, 5: 3, 10: 4, 25:3 });
+
+const error = () => console.log('Sorry, I cannot do that!');
+
+const dump = combo => console.log(`
+  ${combo[1]} pennies
+  ${combo[5]} nickels
+  ${combo[10]} dimes
+  ${combo[25]} quarters`);
+
+const picky = combo => {
+  dump(combo);
+  if (combo[1]) {
+    console.log('Nope, I hate pennies');
+    return false;
+  }
+  return true;
+}
+
+const easy = combo => {
+  dump(combo);
+  return true;  
+}
+
+myChangeMachine(131, picky, error);
+
+// prints out 'Nope, I hate pennies'
+
+myChangeMachine(131, easy, error);
+
+// prints out
+//  1 pennies
+//  3 nickels
+//  4 dimes
+//  3 quarters
+
+myChangeMachine(131, easy, error);
+
+// prints out 'Sorry, I cannot do that!'
+// because the previous call used up all but 19¢
+
+
+
+Notice that the change machine is stateful.  It remembers when the function actually accepts the offered combination and when it doesn't.
+  
+  
+

@@ -1,3 +1,4 @@
+// Start of Challenge function : 
 const makeChangeMachine = values => {
     let combo = values;
 
@@ -48,7 +49,7 @@ const makeChangeMachine = values => {
         }
     }
 }
-
+// end of Challenge function ;
 
 // from the prompt
 
